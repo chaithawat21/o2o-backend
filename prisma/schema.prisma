@@ -14,13 +14,51 @@ datasource db {
 }
 
 model user {
-  id         Int      @id @default(autoincrement())
-  username   String?   @unique
-  password   String   @db.VarChar(255)
-  email      String   @unique
-  firstname  String   @db.VarChar(72)
-  lastname   String   @db.VarChar(72)
-  date_birth DateTime? @db.Date
-  address    String?   @db.VarChar(240)
-  fund       Int?
+  id           Int      @id @default(autoincrement())
+  firstname    String?   @db.VarChar(255)
+  lastname     String?   @unique @db.VarChar(255)
+  username     String?   @unique @db.VarChar(255)
+  password     String?   @db.VarChar(255)
+  email        String?   @unique @db.VarChar(255)
+  birth_date   DateTime? @db.Date
+  address      String?   @db.VarChar(255)
+  phone_number Int?      @unique
+  fund         fund[]
+  cart         cart[]
+}
+
+model fund {
+  id                 Int      @id @default(autoincrement())
+  user               user     @relation(fields: [userId], references: [id])
+  userId             Int
+  created_date       DateTime? @db.Date
+  purpose            String?
+  story              String?
+  total_amount       Int?
+  repayment_schedule DateTime? @db.Date
+  // Category           
+  lend                lend[]
+}
+
+model cart {
+  id        Int      @id @default(autoincrement())
+  date      DateTime? @db.Date
+  lender    user     @relation(fields: [lender_Id], references: [id])
+  lender_Id Int
+  lend      lend[]
+}
+
+model lend {
+  id      Int    @id @default(autoincrement())
+  cart    cart   @relation(fields: [cart_Id], references: [id])
+  cart_Id Int
+  status             status?   @default(flase)
+  fund               fund     @relation(fields: [fund_Id], references: [id])
+  fund_Id            Int
+  amount  Int?
+}
+
+enum status {
+  true
+  flase
 }
