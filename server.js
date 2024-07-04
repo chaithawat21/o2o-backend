@@ -7,6 +7,7 @@ const prisma = require("./models");
 const notFound = require('./middlewares/not-found')
 const errorMiddleware = require('./middlewares/error-middleware')
 const authenticate = require('./middlewares/authenticate');
+
 const authRoute = require('./routes/authRount');
 
 const app = express()
@@ -15,9 +16,7 @@ const app = express()
 
 app.use(express.json())
 
-
 app.use('/auth', authRoute)
-
 
 // not found
 app.use( notFound )
