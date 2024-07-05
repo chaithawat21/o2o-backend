@@ -5,7 +5,7 @@ const customError = require("../utils/customError");
 const tryCatch = require("../utils/tryCatch");
 
 module.exports.register = tryCatch(async (req, res) => {
-  const { firstname, lastname, email, password } = req.body;
+  const { firstname, lastname, password,email } = req.body;
   console.log(req.body);
   const findEmail = await prisma.user.findUnique({
     where: { email },
@@ -19,10 +19,37 @@ module.exports.register = tryCatch(async (req, res) => {
     firstname: firstname,
     lastname: lastname,
     password: hashedPassword,
-    email: email,
+    email: email
   };
 
   await prisma.user.create({ data: user });
 
   res.status(201).json({ message: "Registered" });
 });
+
+module.exports.login = tryCatch(async (req,res) => {
+  const {email,password} = req.body;
+  console.log(req.body)
+  if(!email) {
+    throw customError('use teacher or student code',400)
+  }
+  if (!password) {
+    throw(customError("fill all blank inputs", 400));
+  }
+
+  const rs = await prisma.user.findUnique({where: {email: email}})
+  
+  let loginOk = await bcrypt.compare(password,rs.password)
+  if (!loginOk) {
+    throw (customError('invalid login', 400))
+ }
+
+ const payload = {id: rs.id, firstname: rs.firstname}
+
+const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '30d'})
+ res.json(token)
+}) 
+
+module.exports.getme = tryCatch(async (req,res,next) => {
+  res.json({data: req.user})
+})
