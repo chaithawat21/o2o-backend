@@ -12,19 +12,20 @@ module.exports = tryCatch(async (req, res, next) => {
       throw customError("Unauthorized", 401);
     }
     const token = authorization.split(" ")[1];
+    // console.log(token)
     if (!token) {
       throw customError("Unauthorized", 401);
     }
 
-    // const { id, s_code, t_code } = jwt.verify(token, process.env.JWT_SECRET);
-    // const result = t_code
-    //   ? await prisma.teacher.findUnique({ where: { t_code: t_code } })
-    //   : await prisma.student.findUnique({ where: { s_code: s_code } });
-    delete result.password;
-    req.user = result
+    const {id,firstname} = jwt.verify(token,process.env.JWT_SECRET)
+    const rs = await prisma.user.findFirst({
+      where: {
+        firstname: firstname
+      }
+    })
+    delete rs.password;
+    req.user = rs
     next()
-
-
 });
 
 
