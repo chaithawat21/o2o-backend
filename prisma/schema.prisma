@@ -14,51 +14,60 @@ datasource db {
 }
 
 model user {
-  id           Int      @id @default(autoincrement())
-  firstname    String?   @db.VarChar(255)
-  lastname     String?   @db.VarChar(255)
-  username     String?   @db.VarChar(255)
-  password     String?   @db.VarChar(255)
-  email        String?   @unique @db.VarChar(255)
-  birth_date   DateTime? @db.Date
-  address      String?   @db.VarChar(255)
-  phone_number Int?      @unique
-  fund         fund[]
+  id           Int     @id @default(autoincrement())
+  firstname    String? @db.VarChar(255)
+  lastname     String? @db.VarChar(255)
+  username     String? @db.VarChar(255)
+  password     String? @db.Text
+  email        String? @unique @db.VarChar(255)
+  date_birth   String?
+  address      String? @db.VarChar(255)
+  phone_number String? @unique
+  loan         loan[]
   cart         cart[]
 }
 
-model fund {
-  id                 Int      @id @default(autoincrement())
-  user               user     @relation(fields: [userId], references: [id])
-  userId             Int
-  created_date       DateTime? @db.Date
+model loan {
+  id                 Int       @id @default(autoincrement())
+  borrower           user      @relation(fields: [borrower_id], references: [id])
+  borrower_id        Int
+  created_date       String?
   purpose            String?
   story              String?
   total_amount       Int?
   repayment_schedule DateTime? @db.Date
-  // Category           
-  lend                lend[]
+  categorie          String?   @db.VarChar(255) 
+  business_address   String?          
+  lend               lend[]
 }
 
 model cart {
-  id        Int      @id @default(autoincrement())
-  date      DateTime? @db.Date
-  lender    user     @relation(fields: [lender_Id], references: [id])
-  lender_Id Int
+  id        Int       @id @default(autoincrement())
+  date      String?  
+  lender    user      @relation(fields: [lender_id], references: [id])
+  lender_id Int
   lend      lend[]
 }
 
 model lend {
-  id      Int    @id @default(autoincrement())
-  cart    cart   @relation(fields: [cart_Id], references: [id])
-  cart_Id Int
-  status             status?   @default(flase)
-  fund               fund     @relation(fields: [fund_Id], references: [id])
-  fund_Id            Int
+  id      Int     @id @default(autoincrement())
+  cart    cart    @relation(fields: [cart_id], references: [id])
+  cart_id Int
+  status  status? @default(flase)
+  loan    loan    @relation(fields: [loan_id], references: [id])
+  loan_id Int
   amount  Int?
 }
 
 enum status {
   true
   flase
+}
+
+model contact {
+  id      Int     @id @default(autoincrement())
+  name    String
+  email   String @unique
+  message String
+  createdAt DateTime @default(now())
 }
