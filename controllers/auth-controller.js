@@ -11,7 +11,7 @@ module.exports.register = tryCatch(async (req, res) => {
     where: { email },
   });
   if (findEmail) {
-    throw customError(`Email already taken: ${email}`, 400);
+    return res.status(409).json({ message: 'Email already in use' });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
