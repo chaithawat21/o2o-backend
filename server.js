@@ -9,6 +9,7 @@ const errorMiddleware = require('./middlewares/error-middleware')
 const authenticate = require('./middlewares/authenticate');
 
 const authRoute = require('./routes/authRount');
+const loanRoute = require('./routes/loanRout');
 
 const app = express()
 
@@ -17,6 +18,9 @@ const app = express()
 app.use(express.json())
 
 app.use('/auth', authRoute)
+
+// wit 
+app.use("/loan", loanRoute)
 
 // not found
 app.use( notFound )
