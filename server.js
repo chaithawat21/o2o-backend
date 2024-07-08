@@ -24,7 +24,6 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/about",contactRoute);
 
