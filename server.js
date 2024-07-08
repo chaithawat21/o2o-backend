@@ -11,7 +11,10 @@ const errorMiddleware = require("./middlewares/error-middleware");
 const authenticate = require("./middlewares/authenticate");
 const contactRoute = require("./routes/contactRoute");
 
-const authRoute = require("./routes/authRount");
+
+const authRoute = require('./routes/authRount');
+const loanRoute = require('./routes/loanRout');
+
 
 const app = express();
 
@@ -24,6 +27,9 @@ app.use("/auth", authRoute);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/about",contactRoute);
+
+// wit 
+app.use("/loan", loanRoute)
 
 // not found
 app.use(notFound);
