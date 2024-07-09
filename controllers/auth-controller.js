@@ -52,16 +52,8 @@ module.exports.login = tryCatch(async (req, res) => {
 })
 
 module.exports.getme = tryCatch(async (req, res, next) => {
-  const cart = await prisma.user.findMany({
-    where: { id: req.user.id },
-    include:{
-      cart:{
-        include:{lend:{
-          include:{loan:true}
-        }}
-      }
-    }
-  })
+  const user = await prisma.user.findMany({
+    where: { id: req.user.id }})
   // console.log(cart)
-  res.json({ data: cart })
+  res.json({ user: user })
 })
