@@ -31,10 +31,10 @@ module.exports.login = tryCatch(async (req, res) => {
   const { email, password } = req.body;
   console.log("body",req.body)
   if (!email) {
-    throw customError('use teacher or student code', 400)
+    throw customError('Invalid Email or Password', 400)
   }
   if (!password) {
-    throw (customError("fill all blank inputs", 400));
+    throw (customError("Invalid Email or Password", 400))
   }
 
   const rs = await prisma.user.findUnique({ where: { email: email } })
