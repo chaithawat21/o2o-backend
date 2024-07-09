@@ -34,7 +34,7 @@ const contactController = {
         from: 'chaithawat.pinsuwan@outlook.com',
         to: email,
         subject: 'Thank you for contacting us!',
-        text: `Dear ${name},\n\nThank you for your message. We will get back to you shortly.\n\nBest regards,\nYour Company Name`,
+        text: `Dear ${name},\n\nThank you for your message. We will get back to you shortly.\n\nBest regards,\nO2O Project`,
       });
 
       res.status(200).json({ message: 'Email sent and message saved successfully' });
