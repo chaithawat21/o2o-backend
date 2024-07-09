@@ -9,8 +9,8 @@ require('dotenv').config();
 const transporter = nodemailer.createTransport({
   service: 'hotmail',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: 'chaithawat.pinsuwan@outlook.com',
+    pass: 'manuabkkphphdiac',
   },
 });
 
@@ -19,17 +19,7 @@ const contactController = {
     const { name, email, message } = req.body;
 
     try {
-      // Check if a contact with the given email already exists
-      const existingContact = await prisma.contact.findUnique({
-        where: {
-          email: email, 
-        },
-      });
-
-      if (existingContact) {
-        return res.status(400).json({ error: 'Email address already exists' });
-      }
-
+    
       // Save to MySQL database using Prisma
       const savedMessage = await prisma.contact.create({
         data: {
@@ -41,7 +31,7 @@ const contactController = {
 
       // Send email using Nodemailer
       await transporter.sendMail({
-        from: process.env.EMAIL_USER,
+        from: 'chaithawat.pinsuwan@outlook.com',
         to: email,
         subject: 'Thank you for contacting us!',
         text: `Dear ${name},\n\nThank you for your message. We will get back to you shortly.\n\nBest regards,\nYour Company Name`,

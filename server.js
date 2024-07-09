@@ -24,8 +24,9 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 
+// contact
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/about",contactRoute);
+app.use("/contact",contactRoute);
 
 // wit 
 app.use("/loan", loanRoute)
