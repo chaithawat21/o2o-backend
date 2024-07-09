@@ -1,25 +1,24 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer"); // nodemailer for contact email
 const jwt = require("jsonwebtoken");
-const prisma = require("./models");
-
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const bodyParser = require('body-parser');
+const prisma = require("./models");
 const notFound = require("./middlewares/not-found");
 const errorMiddleware = require("./middlewares/error-middleware");
 const authenticate = require("./middlewares/authenticate");
 const contactRoute = require("./routes/contactRoute");
-
 
 const authRoute = require('./routes/authRount');
 const loanRoute = require('./routes/loanRout');
 const userRoute = require('./routes/userRoute');
 const lendRoute = require('./routes/lendRoute')
 
-const app = express();
+const app = express()
+
 
 app.use(cors());
 
@@ -29,8 +28,8 @@ app.use("/pubblic",express.static('public'))
 
 app.use("/auth", authRoute);
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/about",contactRoute);
+// contact
+app.use("/contact",contactRoute);
 
 // wit 
 app.use("/loan", loanRoute)
@@ -61,10 +60,12 @@ app.post('/create-checkout-session', async (req, res) => {
     }
   });
 
+
 // not found
 app.use(notFound);
 // error
 app.use(errorMiddleware);
 
 const port = process.env.PORT || 8000
+
 app.listen(port, () => console.log("server on", port));
