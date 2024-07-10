@@ -25,23 +25,49 @@ model user {
   phone_number String?   @unique
   ImgUrl       String?   @map("Img_url")
   loan         loan[]
-  cart         cart?
+  lend         lend[]
+  history      history[]
+}
+
+model lend {
+  id         Int      @id @default(autoincrement())
+  user       user     @relation(fields: [user_id], references: [id])
+  user_id    Int
+  history    history? @relation(fields: [history_id], references: [id])
+  history_id Int?
+  status     status?  @default(false)
+  loan       loan     @relation(fields: [loan_id], references: [id])
+  loan_id    Int
+  amount     Int?
+}
+
+enum status {
+  true
+  false
+}
+
+model history {
+  id      Int       @id @default(autoincrement())
+  user    user      @relation(fields: [user_id], references: [id])
+  user_id Int
+  date    DateTime? @db.Timestamp()
+  lend    lend[]
 }
 
 model loan {
-  id                  Int        @id @default(autoincrement())
-  borrower            user       @relation(fields: [borrower_id], references: [id])
-  borrower_id         Int
-  categories          categories @relation(fields: [categorie_id], references: [id])
-  categorie_id        Int
-  created_date        DateTime?
-  purpose             String?
-  story               String?
-  total_amount        Int?
-  repayment_schedule  DateTime?  @db.Date
+  id                 Int        @id @default(autoincrement())
+  borrower           user       @relation(fields: [borrower_id], references: [id])
+  borrower_id        Int
+  categories         categories @relation(fields: [categorie_id], references: [id])
+  categorie_id       Int
+  created_date       DateTime?
+  purpose            String?
+  story              String?
+  total_amount       Int?
+  repayment_schedule DateTime?  @db.Date
   businessAddress    provinces  @relation(fields: [business_address], references: [id])
-  business_address    Int
-  lend                lend[]
+  business_address   Int
+  lend               lend[]
 }
 
 model categories {
@@ -50,34 +76,11 @@ model categories {
   loan           loan[]
 }
 
-model cart {
-  id        Int     @id @default(autoincrement())
-  date      DateTime?
-  lender    user    @relation(fields: [lender_id], references: [id])
-  lender_id Int     @unique
-  lend      lend[]
-}
-
-model lend {
-  id      Int     @id @default(autoincrement())
-  cart    cart    @relation(fields: [cart_id], references: [id])
-  cart_id Int
-  status  status? @default(flase)
-  loan    loan    @relation(fields: [loan_id], references: [id])
-  loan_id Int
-  amount  Int?
-}
-
-enum status {
-  true
-  flase
-}
-
 model contact {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  message   String
+  id      Int    @id @default(autoincrement())
+  name    String
+  email   String @unique
+  message String
 
   createdAt DateTime @default(now())
 }

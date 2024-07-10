@@ -187,25 +187,26 @@ const Loans = [
 ]
 
 const Lends = [
-  {cart_id: 1, loan_id: 1, amount: 100},
-  {cart_id: 2, loan_id: 2, amount: 150},
-  {cart_id: 3, loan_id: 3, amount: 200},
-  {cart_id: 4, loan_id: 4, amount: 250},
-  {cart_id: 5, loan_id: 5, amount: 300},
-  {cart_id: 6, loan_id: 6, amount: 350},
-  {cart_id: 1, loan_id: 2, amount: 700},
-  {cart_id: 2, loan_id: 3, amount: 750},
-  {cart_id: 3, loan_id: 4, amount: 800},
-  {cart_id: 4, loan_id: 5, amount: 850},
-  {cart_id: 5, loan_id: 6, amount: 900},
-  {cart_id: 6, loan_id: 7, amount: 950},
-  {cart_id: 1, loan_id: 3, amount: 1300},
-  {cart_id: 2, loan_id: 4, amount: 1350},
-  {cart_id: 3, loan_id: 5, amount: 1400},
-  {cart_id: 4, loan_id: 6, amount: 1450},
-  {cart_id: 5, loan_id: 7, amount: 1500},
-  {cart_id: 6, loan_id: 8, amount: 1550}
+  {user_id: 1, history_id:null, loan_id: 1, amount: 100},
+  {user_id: 2, history_id:null, loan_id: 2, amount: 150},
+  {user_id: 3, history_id:null, loan_id: 3, amount: 200},
+  {user_id: 4, history_id:null, loan_id: 4, amount: 250},
+  {user_id: 5, history_id:null, loan_id: 5, amount: 300},
+  {user_id: 6, history_id:null, loan_id: 6, amount: 350},
+  {user_id: 1, history_id:null, loan_id: 2, amount: 700},
+  {user_id: 2, history_id:null, loan_id: 3, amount: 750},
+  {user_id: 3, history_id:null, loan_id: 4, amount: 800},
+  {user_id: 4, history_id:null, loan_id: 5, amount: 850},
+  {user_id: 5, history_id:null, loan_id: 6, amount: 900},
+  {user_id: 6, history_id:null, loan_id: 7, amount: 950},
+  {user_id: 1, history_id:null, loan_id: 3, amount: 1300},
+  {user_id: 2, history_id:null, loan_id: 4, amount: 1350},
+  {user_id: 3, history_id:null, loan_id: 5, amount: 1400},
+  {user_id: 4, history_id:null, loan_id: 6, amount: 1450},
+  {user_id: 5, history_id:null, loan_id: 7, amount: 1500},
+  {user_id: 6, history_id:null, loan_id: 8, amount: 1550}
 ]
+
 const categories = [
   {categorie_name: "Agriculture"},
   {categorie_name: "Arts"},
@@ -308,7 +309,6 @@ const provinces = [
 
 async function run() {
   await prisma.user.createMany({ data: Users });
-  await prisma.cart.createMany({ data: Carts });
   await prisma.regions.createMany({ data: regions });
   await prisma.provinces.createMany({ data: provinces });
   await prisma.categories.createMany({ data: categories });

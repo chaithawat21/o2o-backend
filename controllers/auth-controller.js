@@ -29,7 +29,7 @@ module.exports.register = tryCatch(async (req, res) => {
 
 module.exports.login = tryCatch(async (req, res) => {
   const { email, password } = req.body;
-  console.log("body",req.body)
+  // console.log("body",req.body)
   if (!email) {
     throw customError('Invalid Email or Password', 400)
   }
@@ -38,9 +38,9 @@ module.exports.login = tryCatch(async (req, res) => {
   }
 
   const rs = await prisma.user.findUnique({ where: { email: email } })
-   console.log("user",rs)
+  //  console.log("user",rs)
   let loginOk = await bcrypt.compare(password, rs.password)
-  console.log("status Login",loginOk)
+  // console.log("status Login",loginOk)
   if (!loginOk) {
     throw (customError('invalid login', 400))
   }
