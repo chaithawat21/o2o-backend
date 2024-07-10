@@ -15,7 +15,8 @@ const contactRoute = require("./routes/contactRoute");
 const authRoute = require('./routes/authRount');
 const loanRoute = require('./routes/loanRout');
 const userRoute = require('./routes/userRoute');
-const lendRoute = require('./routes/lendRoute')
+const lendRoute = require('./routes/lendRoute');
+const searchRoute = require("./routes/searchRoute");
 
 const app = express()
 
@@ -31,10 +32,14 @@ app.use("/auth", authRoute);
 // contact
 app.use("/contact",contactRoute);
 
+// search
+app.use("/search",searchRoute)
+
 // wit 
 app.use("/loan", loanRoute)
 app.use("/lend",authenticate,lendRoute)
 app.use("/user",authenticate,userRoute)
+
 
 // checkout
 // app.use(express.static('public'));
