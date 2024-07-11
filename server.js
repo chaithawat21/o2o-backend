@@ -46,9 +46,9 @@ app.use("/user", authenticate, userRoute)
 
 // checkout
 // app.use(express.static('public'));
-const YOUR_DOMAIN = 'http://localhost:8888';
+const YOUR_DOMAIN = 'http://localhost:5173/cart';
 app.post('/create-checkout-session', async (req, res) => {
-  console.log(req.body.totalAmount)
+  // console.log(req.body.totalAmount)
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card', 'promptpay'],
@@ -65,11 +65,10 @@ app.post('/create-checkout-session', async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: `${YOUR_DOMAIN}?success=true`,
+      success_url: `http://localhost:5173/success/?success=true`,
       cancel_url: `${YOUR_DOMAIN}?canceled=true`,
     });
-
-    res.json({ url: session.url,status: "success" });
+    res.json({ url: session.url, status: "success" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
