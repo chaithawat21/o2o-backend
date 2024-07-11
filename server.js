@@ -18,12 +18,21 @@ const userRoute = require('./routes/userRoute');
 const lendRoute = require('./routes/lendRoute');
 const searchRoute = require("./routes/searchRoute");
 
-
 const app = express()
+// socket.io
+const chatRoute = require("./routes/chatRoute");
+const chatSocket = require("./utils/chatSocket");
+const http = require("http");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 
 app.use(cors());
-
 app.use(express.json());
 // image
 app.use("/pubblic", express.static('public'))
@@ -75,6 +84,11 @@ app.post('/create-checkout-session', async (req, res) => {
   }
 });
 
+// chatbot
+app.use("/", chatRoute);
+chatSocket(io);
+
+
 // not found
 app.use(notFound);
 // error
@@ -82,4 +96,5 @@ app.use(errorMiddleware);
 
 const port = process.env.PORT || 8000
 
-app.listen(port, () => console.log("server on", port));
+// app.listen(port, () => console.log("server on", port));
+server.listen(port, () => console.log("server on", port));

@@ -64,6 +64,16 @@ const Users = [
     date_birth: new Date('1975-06-06').toISOString(),
     address: 'Rayong',
     phone_number: '0868452319'
+  },
+  {
+    username: 'admin',
+    password: '$2a$10$CNUq04Sq4ckpDCG4LlxXJeIPrAW0yf1TA.7ef9H3JHo3MGwJoipdm',
+    email: 'admin@020.com',
+    firstname: 'admin',
+    lastname: 'admin',
+    date_birth: new Date('1999-09-09').toISOString(),
+    address: 'Bangkok',
+    phone_number: '0999999999'
   }]
 
 const Carts = [
