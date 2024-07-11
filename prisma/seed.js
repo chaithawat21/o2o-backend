@@ -68,7 +68,7 @@ const Users = [
   {
     username: 'admin',
     password: '$2a$10$CNUq04Sq4ckpDCG4LlxXJeIPrAW0yf1TA.7ef9H3JHo3MGwJoipdm',
-    email: 'admin@020.com',
+    email: 'admin@o2o.com',
     firstname: 'admin',
     lastname: 'admin',
     date_birth: new Date('1999-09-09').toISOString(),
