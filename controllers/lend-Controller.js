@@ -4,7 +4,7 @@ const prisma = require("../models");
 module.exports.getlendById = tryCatch(async (req, res) => {
     // console.log(req.user)
     const lend = await prisma.lend.findMany({
-        where: { user_id: req.user.id },
+        where: { user_id: req.user.id, status: false },
         include: {
             loan: {
                 include: { categories: true }
@@ -34,7 +34,8 @@ module.exports.deleteLend = tryCatch(async (req, res) => {
 })
 
 module.exports.checkout = tryCatch(async (req, res) => {
-    const { status } = req.body
+    const { success } = req.body
+    console.log(success)
 
     const his = await prisma.history.create({
         data: {
@@ -48,7 +49,7 @@ module.exports.checkout = tryCatch(async (req, res) => {
         },
         data: {
             history_id: his.id,
-            status: status,
+            status: success,
             
         }
     })
