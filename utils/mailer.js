@@ -14,10 +14,10 @@ exports.sendConfirmationEmail = function({toUser,hash}){
     const message = {
         from: process.env.GOOGLE_USER,
         to: process.env.GOOGLE_USER,
-        subject: "Your App = Activeate Account",
+        subject: "o2o = Activate Account",
         html: `
         <h3>Hello ${toUser.email} </h3>
-        <p>To activate your acount plete follow this Link: <a target="_" href="${process.env.DOMAIN}/${hash}"> Activate link </a></p>
+        <p>To activate your acount please follow this Link: <a target="_" href="${process.env.DOMAIN}/${hash}"> Activate link </a></p>
         `
     }
     transporter.sendMail(message, (err, info) => {
