@@ -1,12 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer"); // nodemailer for contact email
-const jwt = require("jsonwebtoken");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-const bodyParser = require('body-parser');
-const prisma = require("./models");
 const notFound = require("./middlewares/not-found");
 const errorMiddleware = require("./middlewares/error-middleware");
 const authenticate = require("./middlewares/authenticate");
@@ -18,9 +14,7 @@ const userRoute = require('./routes/userRoute');
 const lendRoute = require('./routes/lendRoute');
 const searchRoute = require("./routes/searchRoute");
 
-
 const app = express()
-
 
 app.use(cors());
 

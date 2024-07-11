@@ -5,10 +5,11 @@ const customError = require("../utils/customError");
 const tryCatch = require("../utils/tryCatch");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
+const {sendConfirmationEmail} = require("../utils/mailer");
 
 module.exports.register = tryCatch(async (req, res) => {
   const { firstname, lastname, password, email } = req.body;
-  // console.log(req.body);
+  console.log(req.body);
   const findEmail = await prisma.user.findUnique({
     where: { email },
   });
@@ -17,43 +18,25 @@ module.exports.register = tryCatch(async (req, res) => {
   }
 
   const verificationToken = crypto.randomBytes(20).toString('hex');
-
+  // console.log(verificationToken)
+  // const newUser = new PendingUser
   const hashedPassword = await bcrypt.hash(password, 10);
   const user = {
     firstname: firstname,
     lastname: lastname,
     password: hashedPassword,
-    email: email,
-    verificationToken,
+    email: email
+  
   };
-
-  await prisma.user.create({ data: user });
-
-  await sendVerificationEmail(email, verificationToken);
-
-  res.status(201).json({ message: "Registered" });
+  const newUser = await prisma.user.create({ data: user });
+  try {
+    await sendConfirmationEmail({ toUser: newUser, hash: verificationToken });
+    res.status(201).json({ message: "Registered. Please check your email to activate your account." });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ message: "Error registering user. Please try again later." });
+  }
 });
-
-async function sendVerificationEmail(email, token) {
-  const transporter = nodemailer.createTransport({
-    // Configure your email provider here
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: 'westley.botsford56@ethereal.email',
-        pass: 'uNDX2ZHJzk5NYFTAcW'
-    }
-  });
-
-  const mailOptions = {
-    from: {email},
-    to: email,
-    subject: 'Verify your email address',
-    html: `<p>Click <a href="http://localhost:8888/auth/verify/${token}">here</a> to verify your email address.</p>`
-  };
-
-  await transporter.sendMail(mailOptions);
-}
 
 module.exports.login = tryCatch(async (req, res) => {
   const { email, password } = req.body;
