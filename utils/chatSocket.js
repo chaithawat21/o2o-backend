@@ -14,8 +14,8 @@ const chatSocket = (io) => {
       users.push({ id: socket.id, name: username, room: userRoom });
       allMsg[userRoom] = allMsg[userRoom] ? allMsg[userRoom] : [];
       activeRooms.add(userRoom);
-      console.log(users);
-      console.log(allMsg);
+      // console.log(users);
+      // console.log(allMsg);
       io.to(userRoom).emit("getMessage", allMsg[userRoom]);
       io.emit("activeRooms", Array.from(activeRooms));
 
@@ -45,8 +45,8 @@ const chatSocket = (io) => {
           activeRooms.delete(theRoom);
         }
         console.log("After disconnect");
-        console.log(allMsg);
-        console.log(users);
+        // console.log(allMsg);
+        // console.log(users);
         io.emit("activeRooms", Array.from(activeRooms));
       }
     });
