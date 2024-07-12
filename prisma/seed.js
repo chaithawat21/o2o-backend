@@ -2,8 +2,6 @@ const bcrypt = require("bcryptjs");
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-const hashedPassword = bcrypt.hashSync("123456", 10);
-
 const Users = [
   {
     username: 'andy',
@@ -13,7 +11,8 @@ const Users = [
     lastname: 'Dyan',
     date_birth: new Date('2000-01-01').toISOString(),
     address: 'Bangkok',
-    phone_number: '0868452314'
+    phone_number: '0868452314',
+    verified: true
   },
   {
     username: 'bob',
@@ -23,7 +22,8 @@ const Users = [
     lastname: 'Smith',
     date_birth: new Date('1995-02-02').toISOString(),
     address: 'Chiang Mai',
-    phone_number: '0868452315'
+    phone_number: '0868452315',
+    verified: true
   },
   {
     username: 'charlie',
@@ -33,7 +33,8 @@ const Users = [
     lastname: 'Johnson',
     date_birth: new Date('1990-03-03').toISOString(),
     address: 'Phuket',
-    phone_number: '0868452316'
+    phone_number: '0868452316',
+    verified: true
   },
   {
     username: 'david',
@@ -43,7 +44,8 @@ const Users = [
     lastname: 'Williams',
     date_birth: new Date('1985-04-04').toISOString(),
     address: 'Pattaya',
-    phone_number: '0868452317'
+    phone_number: '0868452317',
+    verified: true
   },
   {
     username: 'emma',
@@ -53,7 +55,8 @@ const Users = [
     lastname: 'Brown',
     date_birth: new Date('1980-05-05').toISOString(),
     address: 'Hua Hin',
-    phone_number: '0868452318'
+    phone_number: '0868452318',
+    verified: true
   },
   {
     username: 'frank',
@@ -63,7 +66,8 @@ const Users = [
     lastname: 'Davis',
     date_birth: new Date('1975-06-06').toISOString(),
     address: 'Rayong',
-    phone_number: '0868452319'
+    phone_number: '0868452319',
+    verified: true
   },
   {
     username: 'admin',
@@ -73,8 +77,10 @@ const Users = [
     lastname: 'admin',
     date_birth: new Date('1999-09-09').toISOString(),
     address: 'Bangkok',
-    phone_number: '0999999999'
-  }]
+    phone_number: '0999999999',
+    verified: true
+  }
+];
 
 const Carts = [
   { date: new Date('2024-07-07').toISOString(), lender_id: 1 },
