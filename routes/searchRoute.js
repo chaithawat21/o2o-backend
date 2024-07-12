@@ -6,11 +6,9 @@ const searchController = require('../controllers/search-controller')
 searchRoute.get('/type',searchController.getTypeSearch)
 
 // search
-searchRoute.get('/:province',searchController.getLoanUserOnSearch)
-
-// by Id
-searchRoute.get('/getLoan/:id',searchController.getLoanById)
-
+searchRoute.get('/province/:province',searchController.getLoanUserOnSearch)
+searchRoute.get('/categorie/:categorie',searchController.getLoanUserOnSearch)
+searchRoute.get('/region/:region',searchController.getLoanUserOnSearch)
 
 
 module.exports = searchRoute

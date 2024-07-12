@@ -13,38 +13,91 @@ module.exports.getTypeSearch = tryCatch(async (req, res, next) => {
   });
 });
 
+// get by search
 module.exports.getLoanUserOnSearch = tryCatch(async (req, res, next) => {
-  // const { regions, province, categories } = req.body;
-  // console.log(province);
-  const {province} = req.params
-  console.log(province);
-  // if (categories) {
-  //   const getLoanUser = await prisma.loan.findMany({
-  //     where: { categorie_id: categories },
-  //     include: {
-  //       borrower: true,
-  //     },
-  //   });
-  //   res.json(getLoanUser)
-  // }
-  if (province) {
+  const {region, province, categorie } = req.params
+
+  // search categories
+  if (categorie) {
     const getLoanUser = await prisma.loan.findMany({
-      where: { business_address: +province },
-      include: {
-        borrower: true,
+      where: { categorie_id: +categorie },
+      select: {
+        id: true,
+        purpose: true,
+        story: true,
+        total_amount: true,
+        borrower: {
+          select: {
+            firstname: true,
+            lastname: true,
+            ImgUrl: true,
+          },
+        },
+        categories: {
+          select: {
+            categorie_name: true,
+          },
+        },
       },
     });
     res.json(getLoanUser)
   }
+
+  // search province
+  if (province) {
+    const getLoanUser = await prisma.loan.findMany({
+      where: { business_address: +province },
+      select: {
+        id: true,
+        purpose: true,
+        story: true,
+        total_amount: true,
+        borrower: {
+          select: {
+            firstname: true,
+            lastname: true,
+            ImgUrl: true,
+          },
+        },
+        categories: {
+          select: {
+            categorie_name: true,
+          },
+        },
+      },
+    });
+    res.json(getLoanUser)
+  }
+
+  if(region) {
+    console.log('test');
+    const getLoanUser = await prisma.loan.findMany({
+      where : {businessAddress:{region_id : +region}},
+      select:{
+        id: true,
+        purpose: true,
+        story: true,
+        total_amount: true,
+        borrower: {
+          select: {
+            firstname: true,
+            lastname: true,
+            ImgUrl: true,
+          },
+        },
+        categories: {
+          select: {
+            categorie_name: true,
+          },
+        },
+        businessAddress:{
+          include:{regions:true}
+        }
+      }
+    });
+    console.log(getLoanUser);
+    res.json(getLoanUser)
+  }
 });
 
-module.exports.getLoanById = tryCatch(async (req, res, next) => {
-  const { id } = req.params;
-  const getLoan = await prisma.loan.findUnique({
-    where: { id: +id },
-    include: {
-      borrower: true,
-    },
-  });
-  console.log(getLoan);
-});
+
