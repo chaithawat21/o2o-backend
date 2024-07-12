@@ -28,7 +28,7 @@ model user {
   lend              lend[]
   history           history[]
   verificationToken String?   @db.VarChar(255)
-  verified          status   @default(false)
+  verified          status    @default(false)
   
 }
 

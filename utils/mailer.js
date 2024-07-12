@@ -17,7 +17,7 @@ exports.sendConfirmationEmail = function({toUser,hash}){
         subject: "o2o = Activate Account",
         html: `
         <h3>Hello ${toUser.email} </h3>
-        <p>To activate your acount please follow this Link: <a target="_" href="${process.env.DOMAIN}/${hash}"> Activate link </a></p>
+        <p>To activate your acount please follow this Link: <a target="_" href="${process.env.DOMAIN}/activation/?hash=${hash}"> Activate link </a></p>
         `
     }
     transporter.sendMail(message, (err, info) => {
