@@ -52,7 +52,7 @@ app.use("/user", authenticate, userRoute)
 // app.use(express.static('public'));
 const YOUR_DOMAIN = 'http://localhost:5173/cart';
 app.post('/create-checkout-session', async (req, res) => {
-  // console.log(req.body.totalAmount)
+  console.log(req.body.totalAmount)
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card', 'promptpay'],
@@ -76,6 +76,7 @@ app.post('/create-checkout-session', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+  // console.log('test')
 });
 
 // chatbot
