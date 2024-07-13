@@ -28,7 +28,6 @@ module.exports.register = tryCatch(async (req, res) => {
     lastname: lastname,
     password: hashedPassword,
     email: email,
-
     verificationToken
 
   };
@@ -73,7 +72,6 @@ module.exports.activation = tryCatch(async(req,res)=> {
 
 module.exports.login = tryCatch(async (req, res) => {
   const { email, password } = req.body;
-  // console.log("body",req.body)
   if (!email) {
     throw customError("Invalid Email or Password", 400);
   }
@@ -82,10 +80,8 @@ module.exports.login = tryCatch(async (req, res) => {
   }
 
   const rs = await prisma.user.findUnique({ where: { email: email } });
-  //  console.log("user",rs.verified)
 
   let loginOk = await bcrypt.compare(password, rs.password);
-  // console.log("status Login",loginOk)
   if (!loginOk) {
     throw customError("invalid login", 400);
   }
@@ -99,12 +95,9 @@ module.exports.login = tryCatch(async (req, res) => {
 
 module.exports.getme = tryCatch(async (req, res, next) => {
   try {
-    console.log("getleaw");
     const user = await prisma.user.findMany({
       where: { id: req.user.id },
     });
-    console.log(user);
-    // console.log(cart)
     res.json({ user: user });
   } catch (error) {
     console.log(error);
