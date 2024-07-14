@@ -1,6 +1,17 @@
 const tryCatch = require("../utils/tryCatch");
 const prisma = require("../models");
 
+module.exports.addLend = tryCatch(async(req,res) => {
+    const {id} = req.body
+    // console.log(req.body)
+    await prisma.lend.create({
+        data: {
+            user_id: req.user.id,
+            loan_id: id
+        }
+    })
+})
+
 module.exports.getlendById = tryCatch(async (req, res) => {
     // console.log(req.user)
     const lend = await prisma.lend.findMany({
