@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
 const checkoutController = require("./controllers/checkout-Controller")
 
 const notFound = require("./middlewares/not-found");
@@ -13,6 +14,7 @@ const loanRoute = require('./routes/loanRout');
 const userRoute = require('./routes/userRoute');
 const lendRoute = require('./routes/lendRoute');
 const searchRoute = require("./routes/searchRoute");
+
 
 const app = express()
 // socket.io
@@ -29,8 +31,15 @@ const io = new Server(server, {
 
 app.use(cors());
 app.use(express.json());
+
+
 // image
-app.use("/pubblic", express.static('public'))
+// Serve static files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Use user route
+app.use('/user', userRoute);
+
+// app.use("/pubblic", express.static('public'))
 
 // user
 app.use("/auth", authRoute);

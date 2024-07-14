@@ -7,8 +7,9 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const { sendConfirmationEmail } = require("../utils/mailer");
 
+
 module.exports.register = tryCatch(async (req, res) => {
-  const { firstname, lastname, password, email } = req.body;
+  const { firstname, lastname, username, password, email } = req.body;
   console.log(req.body);
   const findEmail = await prisma.user.findUnique({
     where: { email },
@@ -26,6 +27,7 @@ module.exports.register = tryCatch(async (req, res) => {
   const user = {
     firstname: firstname,
     lastname: lastname,
+    username: username,
     password: hashedPassword,
     email: email,
     verificationToken
@@ -105,18 +107,39 @@ module.exports.getme = tryCatch(async (req, res, next) => {
 });
 
 module.exports.updateMe = tryCatch(async (req, res, next) => {
-  const { firstname, lastname, date_birth, phone_number, address } = req.body;
-  await prisma.user.update({
-    where: { id: req.user.id },
-    data: {
-      firstname,
-      lastname,
-      phone_number,
-      date_birth: new Date(date_birth).toISOString(),
-      address,
-    },
-  });
-  const payload = { id: req.user.id, firstname: firstname };
-  const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30d" });
-  res.json(token);
+  const { firstname, lastname, username, phone_number, date_birth, address } = req.body;
+
+  // Check if username already exists and is not the same as the current user's username
+  const currentUser = await prisma.user.findUnique({ where: { id: req.user.id } });
+  if (username !== currentUser.username) {
+    const findUsername = await prisma.user.findUnique({
+      where: { username },
+    });
+    if (findUsername) {
+      return res.status(409).json({ message: "Username already in use" });
+    }
+  }
+
+  try {
+    const updatedUser = await prisma.user.update({
+      where: { id: req.user.id },
+      data: {
+        firstname,
+        lastname,
+        username,
+        phone_number,
+        date_birth: new Date(date_birth).toISOString(),
+        address,
+      },
+    });
+
+    // Generate a new token with updated user information
+    const payload = { id: updatedUser.id, firstname: updatedUser.firstname };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "30d" });
+
+    // Send response with new token and updated user object
+    res.json({ token, user: updatedUser });
+  } catch (error) {
+    next(error); // Pass any errors to the error handling middleware
+  }
 });

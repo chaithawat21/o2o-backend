@@ -11,13 +11,17 @@ exports.sendConfirmationEmail = function({toUser,hash}){
             pass: process.env.GOOGLE_PASSWORD
         }
     })
+
     const message = {
         from: process.env.GOOGLE_USER,
-        to: process.env.GOOGLE_USER,
-        subject: "o2o = Activate Account",
+        to: toUser.email,
+        subject: "O2O Project Activate Account",
         html: `
-        <h3>Hello ${toUser.email} </h3>
-        <p>To activate your acount please follow this Link: <a target="_" href="${process.env.DOMAIN}/activation/?hash=${hash}"> Activate link </a></p>
+        <h1>Hello ${toUser.username}!</h1>
+        <p>Welcome to O2O Project! Our community is filled with satisfied customers who have experienced significant success with our platform</p>
+        <p>To activate your acount please follow this Link: <a target="_" href="http://localhost:5173/activation/?hash=${hash}"> Activate link </a></p>
+        <p>Best regards,</p>
+        <p>O2O Project</p>
         `
     }
     transporter.sendMail(message, (err, info) => {

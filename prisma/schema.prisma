@@ -17,7 +17,7 @@ model user {
   id                Int       @id @default(autoincrement())
   firstname         String?   @db.VarChar(255)
   lastname          String?   @db.VarChar(255)
-  username          String?   @db.VarChar(255)
+  username          String?   @unique @db.VarChar(255)
   password          String?   @db.Text
   email             String?   @unique @db.VarChar(255)
   date_birth        DateTime?
