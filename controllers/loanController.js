@@ -37,6 +37,7 @@ module.exports.getloan = tryCatch(async (req, res, next) => {
 
 module.exports.getLoanById = tryCatch(async (req, res, next) => {
   const { id } = req.params;
+  console.log(id);
   const getLoan = await prisma.loan.findUnique({
      where: { id: +id },
      select: {
@@ -44,6 +45,12 @@ module.exports.getLoanById = tryCatch(async (req, res, next) => {
       purpose: true,
       story: true,
       total_amount: true,
+      businessAddress:{
+        select:{
+          regions:{select:{region_name:true,id:true}},
+          id:true,
+          province_name:true
+        },},
       borrower: {
         select: {
           firstname: true,
@@ -58,5 +65,5 @@ module.exports.getLoanById = tryCatch(async (req, res, next) => {
       },
     },
   });
-  console.log(getLoan);
+  res.json(getLoan);
 });
