@@ -4,6 +4,7 @@ const lendRoute = express.Router()
 
 lendRoute.get("/",lendController.getlendById)
 lendRoute.put("/",lendController.updatelend)
+lendRoute.post("/",lendController.addLend)
 lendRoute.delete("/:id",lendController.deleteLend)
 lendRoute.put("/checkout",lendController.checkout)
 lendRoute.put("/updatetotalamount",lendController.updateTotalAmountLoan)

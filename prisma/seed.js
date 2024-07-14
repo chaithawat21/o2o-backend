@@ -324,11 +324,11 @@ const provinces = [
 ];
 
 async function run() {
-  // await prisma.user.createMany({ data: Users });
-  // await prisma.regions.createMany({ data: regions });
-  // await prisma.provinces.createMany({ data: provinces });
-  // await prisma.categories.createMany({ data: categories });
-  // await prisma.loan.createMany({ data: Loans });
+  await prisma.user.createMany({ data: Users });
+  await prisma.regions.createMany({ data: regions });
+  await prisma.provinces.createMany({ data: provinces });
+  await prisma.categories.createMany({ data: categories });
+  await prisma.loan.createMany({ data: Loans });
   await prisma.lend.createMany({ data: Lends });
 }
 run();

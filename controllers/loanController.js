@@ -30,6 +30,7 @@ module.exports.getloan = tryCatch(async (req, res, next) => {
           categorie_name: true,
         },
       },
+      lend: true
     },
   });
   res.json(rs);

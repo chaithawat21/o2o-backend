@@ -70,7 +70,7 @@ model loan {
   repayment_schedule DateTime?  @db.Date
   businessAddress    provinces  @relation(fields: [business_address], references: [id])
   business_address   Int
-  lend               lend[]
+  lend              lend[]
 }
 
 model categories {
