@@ -14,8 +14,8 @@ const chatSocket = (io) => {
       users.push({ id: socket.id, name: username, room: userRoom });
       allMsg[userRoom] = allMsg[userRoom] ? allMsg[userRoom] : [];
       activeRooms.add(userRoom);
-      console.log(users);
-      console.log(allMsg);
+      // console.log(users);
+      // console.log(allMsg);
       io.to(userRoom).emit("getMessage", allMsg[userRoom]);
       io.emit("activeRooms", Array.from(activeRooms));
 
@@ -26,7 +26,7 @@ const chatSocket = (io) => {
         const welcomeMessage = {
           id: "admin",
           username: "admin",
-          msg: `สวัสดีครับ! วันนี้มีอะไรให้ทาง O2O Project ช่วยเหลือครับ?`,
+          msg: `สวัสดีครับ ${username}! วันนี้มีอะไรให้ทาง O2O Project ช่วยเหลือครับ?`,
         };
         allMsg[userRoom].push(welcomeMessage);
         io.to(userRoom).emit("getMessage", allMsg[userRoom]);
@@ -45,8 +45,8 @@ const chatSocket = (io) => {
           activeRooms.delete(theRoom);
         }
         console.log("After disconnect");
-        console.log(allMsg);
-        console.log(users);
+        // console.log(allMsg);
+        // console.log(users);
         io.emit("activeRooms", Array.from(activeRooms));
       }
     });

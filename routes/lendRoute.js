@@ -6,5 +6,6 @@ lendRoute.get("/",lendController.getlendById)
 lendRoute.put("/",lendController.updatelend)
 lendRoute.delete("/:id",lendController.deleteLend)
 lendRoute.put("/checkout",lendController.checkout)
+lendRoute.put("/updatetotalamount",lendController.updateTotalAmountLoan)
 
 module.exports = lendRoute

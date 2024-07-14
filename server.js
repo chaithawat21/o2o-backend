@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const checkoutController = require("./controllers/checkout-Controller")
 
 const notFound = require("./middlewares/not-found");
 const errorMiddleware = require("./middlewares/error-middleware");
@@ -34,6 +34,7 @@ app.use("/pubblic", express.static('public'))
 
 // user
 app.use("/auth", authRoute);
+app.use("/user", authenticate, userRoute)
 
 // contact
 app.use("/contact", contactRoute);
@@ -46,37 +47,9 @@ app.use("/search",searchRoute)
 // Basket 
 app.use("/loan", loanRoute)
 app.use("/lend", authenticate, lendRoute)
-app.use("/user", authenticate, userRoute)
 
 // checkout
-// app.use(express.static('public'));
-const YOUR_DOMAIN = 'http://localhost:5173/cart';
-app.post('/create-checkout-session', async (req, res) => {
-  // console.log(req.body.totalAmount)
-  try {
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card', 'promptpay'],
-      line_items: [
-        {
-          price_data: {
-            currency: 'thb', 
-            product_data: {
-              name: 'Product Name', 
-            },
-            unit_amount: req.body.totalAmount * 100, 
-          },
-          quantity: 1,
-        },
-      ],
-      mode: 'payment',
-      success_url: `http://localhost:5173/success/?success=true`,
-      cancel_url: `${YOUR_DOMAIN}?canceled=true`,
-    });
-    res.json({ url: session.url, status: "success" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+app.post('/create-checkout-session', checkoutController.checkout);
 
 // chatbot
 app.use("/", chatRoute);
