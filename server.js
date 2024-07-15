@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const path = require('path');
+const fs = require('fs');
 const checkoutController = require("./controllers/checkout-Controller")
 
 const notFound = require("./middlewares/not-found");
@@ -35,9 +36,17 @@ app.use(express.json());
 
 // image
 // Serve static files
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-// Use user route
-app.use('/user', userRoute);
+// Serve static files
+const uploadDir = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+  console.log('Created upload directory:', uploadDir);
+} else {
+  console.log('Upload directory exists:', uploadDir);
+}
+
+app.use('/uploads', express.static(uploadDir));
 
 // app.use("/pubblic", express.static('public'))
 
