@@ -15,6 +15,7 @@ const loanRoute = require('./routes/loanRout');
 const userRoute = require('./routes/userRoute');
 const lendRoute = require('./routes/lendRoute');
 const searchRoute = require("./routes/searchRoute");
+const DonateRoute = require("./routes/donateRoute");
 
 
 const app = express()
@@ -65,6 +66,7 @@ app.use("/search",searchRoute)
 // Basket 
 app.use("/loan", loanRoute)
 app.use("/lend", authenticate, lendRoute)
+app.use("/donate",authenticate,DonateRoute)
 
 // checkout
 app.post('/create-checkout-session', checkoutController.checkout);

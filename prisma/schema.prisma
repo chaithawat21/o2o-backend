@@ -26,6 +26,7 @@ model user {
   ImgUrl            String?   @map("Img_url")
   loan              loan[]
   lend              lend[]
+  donate            donate[]
   history           history[]
   verificationToken String?   @db.VarChar(255)
   verified          status    @default(false)
@@ -43,6 +44,15 @@ model lend {
   loan_id    Int
   amount     Int?
 }
+model donate {
+  id         Int      @id @default(autoincrement())
+  user       user     @relation(fields: [user_id], references: [id])
+  user_id    Int
+  history    history? @relation(fields: [history_id], references: [id])
+  history_id Int?
+  status     status?  @default(false)
+  amount     Int?
+}
 
 enum status {
   true
@@ -55,6 +65,7 @@ model history {
   user_id Int
   date    DateTime? @db.Timestamp()
   lend    lend[]
+  donate  donate[]
 }
 
 model loan {

@@ -48,11 +48,22 @@ module.exports.checkout = tryCatch(async (req, res) => {
     const { success } = req.body
     const his = await prisma.history.create({
         data: {
-            user_id: req.user.id
+            user_id: req.user.id,
+            date: new Date().toISOString(),
         }
     })
 
     await prisma.lend.updateMany({
+        where: {
+            user_id: req.user.id,
+            status: false
+        },
+        data: {
+            history_id: his.id,
+            status: success,
+        }
+    })
+    await prisma.donate.updateMany({
         where: {
             user_id: req.user.id,
             status: false
