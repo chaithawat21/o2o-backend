@@ -2,7 +2,7 @@ const multer = require('multer');
 const path = require('path');
 
 // Define the target folder for uploads
-const targetFolder = path.join(__dirname, 'uploads');
+const targetFolder = path.join(__dirname, '..', 'uploads');
 console.log('Target folder for uploads:', targetFolder);
 
 // Multer storage configuration
