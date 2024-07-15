@@ -2,6 +2,35 @@ const tryCatch = require("../utils/tryCatch");
 const prisma = require("../models");
 const { join } = require("@prisma/client/runtime/library");
 
+selectValue = {
+  id: true,
+  purpose: true,
+  story: true,
+  total_amount: true,
+  businessAddress: {
+    select: {
+      regions: { select: { region_name: true, id: true } },
+      id: true,
+      province_name: true,
+    },
+  },
+  borrower: {
+    select: {
+      firstname: true,
+      lastname: true,
+      ImgUrl: true,
+    },
+  },
+  categories: {
+    select: {
+      categorie_name: true,
+    },
+  },
+  businessAddress: {
+    include: { regions: true },
+  },
+};
+
 module.exports.getTypeSearch = tryCatch(async (req, res, next) => {
   const getRegions = await prisma.regions.findMany();
   const getProvinces = await prisma.provinces.findMany();
@@ -15,107 +44,37 @@ module.exports.getTypeSearch = tryCatch(async (req, res, next) => {
 
 // get by search
 module.exports.getLoanUserOnSearch = tryCatch(async (req, res, next) => {
-  const {region, province, categorie } = req.params
+  const { region, province, categorie ,loan} = req.params;
 
   // search categories
   if (categorie) {
     const getLoanUser = await prisma.loan.findMany({
       where: { categorie_id: +categorie },
-      select: {
-        id: true,
-        purpose: true,
-        story: true,
-        total_amount: true,
-        businessAddress:{
-          select:{
-            regions:{select:{region_name:true,id:true}},
-            id:true,
-            province_name:true
-          },},
-        borrower: {
-          select: {
-            firstname: true,
-            lastname: true,
-            ImgUrl: true,
-          },
-        },
-        categories: {
-          select: {
-            categorie_name: true,
-          },
-        },
-      },
+      select: selectValue,
     });
-    res.json(getLoanUser)
+    res.json(getLoanUser);
   }
 
-  // search province
   if (province) {
     const getLoanUser = await prisma.loan.findMany({
       where: { business_address: +province },
-      select: {
-        id: true,
-        purpose: true,
-        story: true,
-        total_amount: true,
-        businessAddress:{
-          select:{
-            regions:{select:{region_name:true,id:true}},
-            id:true,
-            province_name:true
-          },},
-        borrower: {
-          select: {
-            firstname: true,
-            lastname: true,
-            ImgUrl: true,
-          },
-        },
-        categories: {
-          select: {
-            categorie_name: true,
-          },
-        },
-      },
+      select: selectValue,
     });
-    res.json(getLoanUser)
+    res.json(getLoanUser);
   }
 
-  if(region) {
-    console.log('test');
+  if (region) {
     const getLoanUser = await prisma.loan.findMany({
-      where : {businessAddress:{region_id : +region}},
-      select:{
-        id: true,
-        purpose: true,
-        story: true,
-        total_amount: true,
-        businessAddress:{
-          select:{
-            regions:{select:{region_name:true,id:true}},
-            id:true,
-            province_name:true
-          },},
-        borrower: {
-          select: {
-            firstname: true,
-            lastname: true,
-            ImgUrl: true,
-          },
-        },
-        categories: {
-          select: {
-            categorie_name: true,
-          },
-        },
-        businessAddress:{
-          include:{regions:true}
-        }
-      }
+      where: { businessAddress: { region_id: +region } },
+      select: selectValue,
     });
-    console.log(getLoanUser);
-    res.json(getLoanUser)
+    res.json(getLoanUser);
+  }
+  if (loan) {
+    const getLoanUser = await prisma.loan.findMany({
+      where: { id: +loan },
+      select: selectValue,
+    });
+    res.json(getLoanUser);
   }
 });
-
-
