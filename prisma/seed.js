@@ -12,7 +12,8 @@ const Users = [
     date_birth: new Date('2000-01-01').toISOString(),
     address: 'Bangkok',
     phone_number: '0868452314',
-    verified: true
+    verified: true,
+    ImgUrl: '/uploads/1721061019639-882123812.png'
   },
   {
     username: 'bob',
@@ -23,7 +24,8 @@ const Users = [
     date_birth: new Date('1995-02-02').toISOString(),
     address: 'Chiang Mai',
     phone_number: '0868452315',
-    verified: true
+    verified: true,
+    ImgUrl: '/uploads/1721061061829-41182734.png'
   },
   {
     username: 'charlie',
@@ -34,7 +36,8 @@ const Users = [
     date_birth: new Date('1990-03-03').toISOString(),
     address: 'Phuket',
     phone_number: '0868452316',
-    verified: true
+    verified: true,
+    ImgUrl: '/uploads/1721061103653-901139623.png'
   },
   {
     username: 'david',
@@ -45,7 +48,8 @@ const Users = [
     date_birth: new Date('1985-04-04').toISOString(),
     address: 'Pattaya',
     phone_number: '0868452317',
-    verified: true
+    verified: true,
+    ImgUrl: '/uploads/1721061187070-953318846.png'
   },
   {
     username: 'emma',
@@ -56,7 +60,8 @@ const Users = [
     date_birth: new Date('1980-05-05').toISOString(),
     address: 'Hua Hin',
     phone_number: '0868452318',
-    verified: true
+    verified: true,
+    ImgUrl: '/uploads/1721061236207-983333935.png'
   },
   {
     username: 'frank',
@@ -67,7 +72,8 @@ const Users = [
     date_birth: new Date('1975-06-06').toISOString(),
     address: 'Rayong',
     phone_number: '0868452319',
-    verified: true
+    verified: true,
+    ImgUrl: '/uploads/1721061268231-199146657.png'
   },
   {
     username: 'admin',
