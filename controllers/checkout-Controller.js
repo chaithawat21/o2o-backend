@@ -3,7 +3,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const YOUR_DOMAIN = 'http://localhost:5173/cart';
 module.exports.checkout = async (req, res) => {
-    console.log(req.body.totalAmount)
+    console.log(req.body.Sum)
     try {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card', 'promptpay'],
@@ -14,7 +14,7 @@ module.exports.checkout = async (req, res) => {
               product_data: {
                 name: 'Product Name', 
               },
-              unit_amount: req.body.totalAmount * 100, 
+              unit_amount: req.body.Sum * 100, 
             },
             quantity: 1,
           },
