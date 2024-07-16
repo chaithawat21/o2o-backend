@@ -85,6 +85,128 @@ const Users = [
     address: 'Bangkok',
     phone_number: '0999999999',
     verified: true
+  },
+
+  {
+    username: 'george',
+    password: '',
+    email: 'george@gmail.com',
+    firstname: 'George',
+    lastname: 'Miller',
+    date_birth: new Date('1998-07-07').toISOString(),
+    address: 'Krabi',
+    phone_number: '0868452320',
+    verified: true
+  },
+  {
+    username: 'hannah',
+    password: '',
+    email: 'hannah@gmail.com',
+    firstname: 'Hannah',
+    lastname: 'Martinez',
+    date_birth: new Date('1994-08-08').toISOString(),
+    address: 'Koh Samui',
+    phone_number: '0868452321',
+    verified: true
+  },
+  {
+    username: 'ian',
+    password: '',
+    email: 'ian@gmail.com',
+    firstname: 'Ian',
+    lastname: 'Garcia',
+    date_birth: new Date('1992-09-09').toISOString(),
+    address: 'Ayutthaya',
+    phone_number: '0868452322',
+    verified: true
+  },
+  {
+    username: 'julia',
+    password: '',
+    email: 'julia@gmail.com',
+    firstname: 'Julia',
+    lastname: 'Roberts',
+    date_birth: new Date('1990-10-10').toISOString(),
+    address: 'Hat Yai',
+    phone_number: '0868452323',
+    verified: true
+  },
+  {
+    username: 'kevin',
+    password: '',
+    email: 'kevin@gmail.com',
+    firstname: 'Kevin',
+    lastname: 'Lopez',
+    date_birth: new Date('1988-11-11').toISOString(),
+    address: 'Nakhon Ratchasima',
+    phone_number: '0868452324',
+    verified: true
+  },
+  {
+    username: 'lisa',
+    password: '',
+    email: 'lisa@gmail.com',
+    firstname: 'Lisa',
+    lastname: 'Clark',
+    date_birth: new Date('1986-12-12').toISOString(),
+    address: 'Nong Khai',
+    phone_number: '0868452325',
+    verified: true
+  },
+  {
+    username: 'michael',
+    password: '',
+    email: 'michael@gmail.com',
+    firstname: 'Michael',
+    lastname: 'White',
+    date_birth: new Date('1984-01-13').toISOString(),
+    address: 'Chiang Rai',
+    phone_number: '0868452326',
+    verified: true
+  },
+  {
+    username: 'nancy',
+    password: '',
+    email: 'nancy@gmail.com',
+    firstname: 'Nancy',
+    lastname: 'King',
+    date_birth: new Date('1982-02-14').toISOString(),
+    address: 'Khon Kaen',
+    phone_number: '0868452327',
+    verified: true
+  },
+  {
+    username: 'oliver',
+    password: '',
+    email: 'oliver@gmail.com',
+    firstname: 'Oliver',
+    lastname: 'Hall',
+    date_birth: new Date('1981-03-15').toISOString(),
+    address: 'Surat Thani',
+    phone_number: '0868452328',
+    verified: true
+  },
+  {
+    username: 'pamela',
+    password: '',
+    email: 'pamela@gmail.com',
+    firstname: 'Pamela',
+    lastname: 'Young',
+    date_birth: new Date('1983-04-16').toISOString(),
+    address: 'Trang',
+    phone_number: '0868452329',
+    verified: true
+  },
+  {
+    username: 'quincy',
+    password: '',
+    email: 'quincy@gmail.com',
+    firstname: 'Quincy',
+    lastname: 'Scott',
+    date_birth: new Date('1987-05-17').toISOString(),
+    address: 'Lampang',
+    phone_number: '0868452330',
+    verified: true
   }
 ];
 
@@ -93,7 +215,7 @@ const Loans = [
     borrower_id: 1,
     created_date: new Date('2024-06-01').toISOString(),
     purpose: 'Buy seeds and fertilizers',
-    story: 'Starting a small agricultural business',
+    story: `Starting a small agricultural business to uplift the lives of our local community. Our farm aims to provide fresh, organic produce to nearby markets, creating a sustainable food source and boosting local economy. With your help, we can buy high-quality seeds and fertilizers that will significantly increase our crop yield. This will not only improve our livelihood but also support the education of our children and the health of our families. Our commitment to sustainable farming practices ensures that we preserve the environment for future generations. By supporting our loan, you're investing in a community's growth, health, and future. We believe in hard work, dedication, and the power of community support to overcome challenges and create a better tomorrow. Your contribution will make a tangible difference, allowing us to improve our farming techniques, increase productivity, and achieve greater financial stability. Thank you for believing in our vision and helping us achieve our dreams.`,
     total_amount: 10000,
     categorie_id: 1,
     business_address: 30
@@ -144,7 +266,7 @@ const Loans = [
     business_address: 57
   },
   {
-    borrower_id: 1,
+    borrower_id: 7,
     created_date: new Date('2024-06-07').toISOString(),
     purpose: 'Marketing campaign',
     story: 'Launching a marketing campaign to boost sales',
@@ -153,7 +275,7 @@ const Loans = [
     business_address: 30
   },
   {
-    borrower_id: 2,
+    borrower_id: 8,
     created_date: new Date('2024-06-08').toISOString(),
     purpose: 'Buy livestock',
     story: 'Starting a small livestock farm',
@@ -162,7 +284,7 @@ const Loans = [
     business_address: 1
   },
   {
-    borrower_id: 3,
+    borrower_id: 9,
     created_date: new Date('2024-06-09').toISOString(),
     purpose: 'Hire employees',
     story: 'Hiring employees to expand my business',
@@ -171,7 +293,7 @@ const Loans = [
     business_address: 3
   },
   {
-    borrower_id: 4,
+    borrower_id: 10,
     created_date: new Date('2024-06-10').toISOString(),
     purpose: 'Upgrade technology',
     story: 'Upgrading technology to improve efficiency',
@@ -180,7 +302,7 @@ const Loans = [
     business_address: 54
   },
   {
-    borrower_id: 5,
+    borrower_id: 11,
     created_date: new Date('2024-06-11').toISOString(),
     purpose: 'Develop website',
     story: 'Developing a website to reach more customers',
@@ -189,13 +311,41 @@ const Loans = [
     business_address: 3
   },
   {
-    borrower_id: 6,
+    borrower_id: 12,
     created_date: new Date('2024-06-12').toISOString(),
     purpose: 'Purchase materials',
     story: 'Purchasing materials for my handmade crafts business',
     total_amount: 4000,
     categorie_id: 7,
     business_address: 57
+  },
+
+  {
+    borrower_id: 13,
+    created_date: new Date('2024-06-16').toISOString(),
+    purpose: 'Build a greenhouse',
+    story: 'Building a greenhouse to grow organic vegetables',
+    total_amount: 15000,
+    categorie_id: 1,
+    business_address: 10
+  },
+  {
+    borrower_id: 14,
+    created_date: new Date('2024-06-17').toISOString(),
+    purpose: 'Buy musical instruments',
+    story: 'Buying musical instruments for a community music program',
+    total_amount: 12000,
+    categorie_id: 2,
+    business_address: 20
+  },
+  {
+    borrower_id: 15,
+    created_date: new Date('2024-06-18').toISOString(),
+    purpose: 'Open a health clinic',
+    story: 'Opening a small health clinic in my community',
+    total_amount: 20000,
+    categorie_id: 5,
+    business_address: 50
   }
 ]
 const donate = [
