@@ -19,6 +19,7 @@ selectValue = {
       firstname: true,
       lastname: true,
       ImgUrl: true,
+      id: true,
     },
   },
   categories: {
@@ -78,3 +79,12 @@ module.exports.getLoanUserOnSearch = tryCatch(async (req, res, next) => {
     res.json(getLoanUser);
   }
 });
+
+module.exports.getAmountAllId = tryCatch(async(req,res,next)=> {
+  const getAmountAllId = await prisma.lend.groupBy({
+    by:['loan_id'],
+    where:{status:true},
+    _sum:{amount:true},
+  })
+  res.json(getAmountAllId)
+}) 
