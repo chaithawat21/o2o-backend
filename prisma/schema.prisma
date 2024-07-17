@@ -75,8 +75,8 @@ model loan {
   categories         categories @relation(fields: [categorie_id], references: [id])
   categorie_id       Int
   created_date       DateTime?
-  purpose            String?
-  story              String?
+  purpose            String? 
+  story              String?    @db.Text()
   total_amount       Int?
   repayment_schedule DateTime?  @db.Date
   businessAddress    provinces  @relation(fields: [business_address], references: [id])

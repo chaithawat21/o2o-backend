@@ -4,16 +4,19 @@ const prisma = require("../models");
 module.exports.addLend = tryCatch(async(req,res) => {
     const {id} = req.body
     // console.log(req.body)
-    await prisma.lend.create({
+   const rs = await prisma.lend.create({
         data: {
             user_id: req.user.id,
             loan_id: id
         }
     })
+    res.json(rs)
 })
 
 module.exports.getlendById = tryCatch(async (req, res) => {
-    // console.log(req.user)
+    // console.log("getlend..")
+    // console.log("user ID",req.user.id)
+
     const lend = await prisma.lend.findMany({
         where: { user_id: req.user.id, status: false },
         include: {
@@ -85,25 +88,25 @@ module.exports.updateTotalAmountLoan = tryCatch(async (req, res) => {
                 loan: true
             }
         })
+      res.json(lenduser)
+        // const updatedLoans = new Set();
 
-        const updatedLoans = new Set();
+        // for (const item of lenduser) {
+        //     const loanId = item.loan.id;
+        //     const lendAmount = item.amount;
 
-        for (const item of lenduser) {
-            const loanId = item.loan.id;
-            const lendAmount = item.amount;
+        //     if (!updatedLoans.has(loanId)) {
+        //         const newTotalAmount = item.loan.total_amount + lendAmount;
 
-            if (!updatedLoans.has(loanId)) {
-                const newTotalAmount = item.loan.total_amount + lendAmount;
+        //         await prisma.loan.update({
+        //             where: { id: loanId },
+        //             data: { total_amount: newTotalAmount },
+        //         });
 
-                await prisma.loan.update({
-                    where: { id: loanId },
-                    data: { total_amount: newTotalAmount },
-                });
-
-                console.log(`Updated total_amount for loan id ${loanId} to ${newTotalAmount}`);
-                updatedLoans.add(loanId);
-            }
-        }
+        //         console.log(`Updated total_amount for loan id ${loanId} to ${newTotalAmount}`);
+        //         updatedLoans.add(loanId);
+        //     }
+        // }
     }
 
 })
