@@ -21,7 +21,8 @@ module.exports.getlendById = tryCatch(async (req, res) => {
         where: { user_id: req.user.id, status: false },
         include: {
             loan: {
-                include: { categories: true }
+                include: { categories: true ,borrower:true}
+                
             }
         }
     })
