@@ -11,5 +11,7 @@ searchRoute.get('/categorie/:categorie',searchController.getLoanUserOnSearch)
 searchRoute.get('/region/:region',searchController.getLoanUserOnSearch)
 searchRoute.get('/loan/:loan',searchController.getLoanUserOnSearch)
 
+searchRoute.get('/getAmountAllId',searchController.getAmountAllId)
+
 
 module.exports = searchRoute

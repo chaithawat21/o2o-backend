@@ -26,7 +26,7 @@ const chatSocket = (io) => {
         const welcomeMessage = {
           id: "admin",
           username: "admin",
-          msg: `สวัสดีครับ ${username}! วันนี้มีอะไรให้ทาง O2O Project ช่วยเหลือครับ?`,
+          msg: `Hello ${username}! What can I assist you with regarding the O2O Project today?`,
         };
         allMsg[userRoom].push(welcomeMessage);
         io.to(userRoom).emit("getMessage", allMsg[userRoom]);
