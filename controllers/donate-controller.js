@@ -43,9 +43,17 @@ module.exports.updateDonate = tryCatch(async (req, res) => {
     console.log(id,newAmount)
     console.log("Update Doante..")
 
-    // const rs = await prisma.lend.update({
-    //     where: { id: id },
-    //     data: { amount: newAmount }
-    // })
-    // res.json(rs)
+    const rs = await prisma.donate.update({
+        where: { id: id,status: false },
+        data: { amount: +newAmount }
+    })
+    res.json(rs)
+})
+
+module.exports.deleteDonate = tryCatch(async(req,res) => {
+    const {id} = req.params
+    const rs = await prisma.donate.delete({
+        where: {id: +id}
+    })
+    res.json(rs)
 })

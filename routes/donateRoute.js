@@ -5,6 +5,9 @@ const DonateRoute = express.Router()
 
 DonateRoute.get("/",donateController.getDonateByUser)
 DonateRoute.post("/",donateController.donate)
+DonateRoute.put("/",donateController.updateDonate)
+DonateRoute.delete("/:id",donateController.deleteDonate)
+
 
 
 module.exports = DonateRoute
