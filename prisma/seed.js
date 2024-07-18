@@ -266,7 +266,7 @@ const Loans = [
     business_address: 57
   },
   {
-    borrower_id: 7,
+    borrower_id: 16,
     created_date: new Date('2024-06-07').toISOString(),
     purpose: 'Marketing campaign',
     story: 'Launching a marketing campaign to boost sales',
@@ -371,7 +371,23 @@ const Lends = [
   { user_id: 3, history_id: null, loan_id: 5, amount: 1400 },
   { user_id: 4, history_id: null, loan_id: 6, amount: 1450 },
   { user_id: 5, history_id: null, loan_id: 7, amount: 1500 },
-  { user_id: 6, history_id: null, loan_id: 8, amount: 1550 }
+  { user_id: 6, history_id: null, loan_id: 8, amount: 1550 },
+  // adjust progress bar part
+  { user_id: 7, history_id: null, loan_id: 1, amount: 7000, status: true }, //70%
+  { user_id: 7, history_id: null, loan_id: 2, amount: 9000, status: true }, //60%
+  { user_id: 7, history_id: null, loan_id: 3, amount: 7200, status: true }, //90%
+  { user_id: 7, history_id: null, loan_id: 4, amount: 3000, status: true }, //60%
+  { user_id: 7, history_id: null, loan_id: 5, amount: 14000, status: true }, //70%
+  { user_id: 7, history_id: null, loan_id: 6, amount: 4800, status: true }, //40%
+  { user_id: 7, history_id: null, loan_id: 7, amount: 3000, status: true }, //50%
+  { user_id: 7, history_id: null, loan_id: 8, amount: 4200, status: true }, //60%
+  { user_id: 7, history_id: null, loan_id: 9, amount: 4200, status: true }, //30%
+  { user_id: 7, history_id: null, loan_id: 10, amount: 4400, status: true }, //40%
+  { user_id: 7, history_id: null, loan_id: 11, amount: 1800, status: true }, //20%
+  { user_id: 7, history_id: null, loan_id: 12, amount: 1200, status: true }, //30%
+  { user_id: 7, history_id: null, loan_id: 13, amount: 1500, status: true }, //10%
+  { user_id: 7, history_id: null, loan_id: 14, amount: 2400, status: true }, //20%
+  { user_id: 7, history_id: null, loan_id: 15, amount: 2000, status: true } //10%
 ]
 
 const categories = [
