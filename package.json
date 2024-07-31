@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "resetDB": "node prisma/resetDB.js",
+    "seed": "node prisma/seed.js",
     "start": "node server.js"
   },
   "prisma": {
@@ -17,14 +18,21 @@
   "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a",
   "devDependencies": {
     "nodemon": "^3.1.4",
-    "prisma": "^5.16.1"
+    "prisma": "^5.16.2"
   },
   "dependencies": {
-    "@prisma/client": "^5.16.1",
+    "@prisma/client": "^5.16.2",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "multer": "1.4.5-lts.1",
+    "mysql2": "^3.10.3",
+    "nodemailer": "^6.9.14",
+    "socket.io": "^4.7.5",
+    "stripe": "^16.2.0"
   }
 }
